@@ -18,16 +18,8 @@
           <input class="form-control me-2" type="search" placeholder="搜索" aria-label="Search">
           <button class="btn btn-success text-nowrap" type="submit">搜索</button>
         </form> -->
-      <ul class="navbar-nav" v-if="!$store.state.user.is_login"> 
-        <li class="nav-item">
-          <router-link class="nav-link text-white" :to="{name: 'user_account_login'}">登录</router-link >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link text-white" :to="{name: 'user_account_register'}">注册</router-link >
-        </li>
-      </ul>
-      <ul class="navbar-nav" v-else> 
-          <li class="nav-item dropdown" v-if="$store.state.user.is_login">
+        <ul class="navbar-nav" v-if="$store.state.user.is_login"> 
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ $store.state.user.username }}
             </a>
@@ -40,6 +32,15 @@
             </ul>
           </li>
       </ul> 
+      <ul class="navbar-nav" v-else-if="!$store.state.user.pulling_info"> 
+        <li class="nav-item">
+          <router-link class="nav-link text-white" :to="{name: 'user_account_login'}">登录</router-link >
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link text-white" :to="{name: 'user_account_register'}">注册</router-link >
+        </li>
+      </ul>
+      
     </div>
   </div>
 </nav>

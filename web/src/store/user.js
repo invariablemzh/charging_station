@@ -5,6 +5,7 @@ export default {
         id: "",
         username: "",
         token: "",
+        money: 0,
         is_login: false,
         pulling_info: true, //是否正在拉去信息
     },  
@@ -14,6 +15,7 @@ export default {
         updateUser(state, user){
             state.id = user.id;
             state.username = user.username;
+            state.money = user.money;
             state.is_login = user.is_login;
         },
         updateToken(state, token){
@@ -23,6 +25,7 @@ export default {
             state.id = "";
             state.username = "";
             state.password = "";
+            state.money = 0;
             state.is_login = false;
         },
         updatePullingInfo(state, pulling_info){
@@ -37,12 +40,27 @@ export default {
                 data: {
                     username: data.username,
                     password: data.password,
+                    money: data.money,
                 },
                 success(resp) {
                     if (resp.error_message === "success") {
                         localStorage.setItem("jwt_token", resp.token),
                         context.commit("updateToken", resp.token);
                         data.success(resp);
+                        // $.ajax({
+                        //     url:"http://127.0.0.1:3000/user/account/money/",
+                        //     type: "get",
+                        //     headers: {
+                        //         Authorization: "Bearer " + store.state.user.token,
+                        //     },
+                        //     success(resp){
+                        //         money.value = resp.money;
+                        //         console.log(resp);
+                        //     },
+                        //     error(resp){
+                        //       console.log(resp);
+                        //     }
+                        //   });
                     } else {
                         data.error(resp);
                     }
@@ -51,6 +69,7 @@ export default {
                     data.error(resp);
                 }
             });
+            
         },
         getinfo(context, data){
             $.ajax({

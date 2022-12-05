@@ -19,19 +19,21 @@
           <button class="btn btn-success text-nowrap" type="submit">搜索</button>
         </form> -->
         <ul class="navbar-nav" v-if="$store.state.user.is_login"> 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item dropdown pianyi">
+            <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
               {{ $store.state.user.username }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><router-link class="dropdown-item" :to="{name: 'account'}">账户信息</router-link ></li>
               <li><router-link class="dropdown-item" :to="{name: 'orderlist'}">订单详情</router-link ></li>
               <li><router-link class="dropdown-item" :to="{name: 'payrecord'}">充值记录</router-link ></li>
-              <li><router-link class="dropdown-item" :to="{name: 'buyrecord'}">消费记录</router-link ></li>
               <li><a class="dropdown-item" href="#" @click="logout">退出</a ></li>
             </ul>
           </li>
-      </ul> 
+          <li class="nav-item">
+            <card class="nav-link active text-white" href="">余额: {{ $store.state.user.money }}</card >
+          </li>    
+        </ul> 
+
       <ul class="navbar-nav" v-else-if="!$store.state.user.pulling_info"> 
         <li class="nav-item">
           <router-link class="nav-link text-white" :to="{name: 'user_account_login'}">登录</router-link >
@@ -63,7 +65,6 @@ export default{
     const logout = () => {
       store.dispatch("logout");
     }
-
     return {
       route_name,
       logout,
@@ -74,13 +75,9 @@ export default{
 
 
 <style scoped>
-.d-flex{
-  margin: 0px 100px;
-}
 
 .pianyi{
   margin: 0px 20px;
 }
-
 
 </style>

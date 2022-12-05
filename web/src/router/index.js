@@ -3,8 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import UserAccountLoginView from '../views/user/account/UserAccountLoginView.vue'
 import UserAccountRegisterView from '../views/user/account/UserAccountRegisterView.vue'
 import ChongDianZhuang from '../views/ChongDianZhuang.vue'
-import AccountView from '../views/AccountView.vue'
-import BuyRecord from '../views/BuyRecord.vue'
 import OrderList from '../views/OrderList.vue'
 import PayRecord from '../views/PayRecord.vue'
 import NotFound from '../views/error/NotFound.vue'
@@ -28,25 +26,9 @@ const routes = [
     }
   },
   {
-    path: '/account/',
-    name: 'account',
-    component: AccountView,
-    meta: {
-      requestAuth: true,
-    }
-  },
-  {
     path: '/orderlist/',
     name: 'orderlist',
     component: OrderList,
-    meta: {
-      requestAuth: true,
-    }
-  },
-  {
-    path: '/buyrecord/',
-    name: 'buyrecord',
-    component: BuyRecord,
     meta: {
       requestAuth: true,
     }

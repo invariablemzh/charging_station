@@ -1,5 +1,7 @@
 package com.charging_station.backend.service.impl.user.account;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.charging_station.backend.mapper.UserMapper;
 import com.charging_station.backend.pojo.User;
 import com.charging_station.backend.service.impl.utils.UserDetailsImpl;
 import com.charging_station.backend.service.user.account.LoginService;
@@ -19,6 +21,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public Map<String, String> getToken(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken =
@@ -28,6 +33,8 @@ public class LoginServiceImpl implements LoginService {
         UserDetailsImpl loginUser = (UserDetailsImpl) authenticate.getPrincipal();
         User user = loginUser.getUser();
         String jwt = JwtUtil.createJWT(user.getId().toString());
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",user.getId());
         Map<String,String> map = new HashMap<>();
         map.put("error_message","success");
         map.put("token",jwt);

@@ -8,6 +8,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col">用户编号</th>
                 <th scope="col">订单编号</th>
                 <th scope="col">充电桩编号</th>
                 <th scope="col">开始时间</th>
@@ -19,6 +20,7 @@
             </thead>
             <tbody>
               <tr v-for="orderlist in orderlists" :key="orderlist.orderId">
+                <th>{{ orderlist.id }} </th> 
                 <th>{{ orderlist.orderId }}</th>
                 <th>{{ orderlist.chargingId }}</th>
                 <th>{{ orderlist.startTime }}</th>

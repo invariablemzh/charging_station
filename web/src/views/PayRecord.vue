@@ -8,6 +8,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col">用户编号</th>
                 <th scope="col">充值记录编号</th>
                 <th scope="col">充值时间</th>
                 <th scope="col">支付方式</th>
@@ -17,6 +18,7 @@
             </thead>
             <tbody>
               <tr v-for="chargingRecord in chargingRecords" :key="chargingRecord.recordId">
+                <th>{{ chargingRecord.id }}</th>
                 <th>{{ chargingRecord.recordId }}</th>
                 <th>{{ chargingRecord.time }}</th>
                 <th>{{ chargingRecord.payMethod }}</th>

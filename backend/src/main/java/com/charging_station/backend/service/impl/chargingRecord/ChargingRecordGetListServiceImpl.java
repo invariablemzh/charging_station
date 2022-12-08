@@ -3,6 +3,7 @@ package com.charging_station.backend.service.impl.chargingRecord;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.charging_station.backend.mapper.ChargingRecordMapper;
 import com.charging_station.backend.pojo.ChargingRecord;
+import com.charging_station.backend.pojo.Orderlist;
 import com.charging_station.backend.pojo.User;
 import com.charging_station.backend.service.chargingRecord.ChargingRecordGetListService;
 import com.charging_station.backend.service.impl.utils.UserDetailsImpl;
@@ -25,8 +26,14 @@ public class ChargingRecordGetListServiceImpl implements ChargingRecordGetListSe
         UserDetailsImpl loginUser = (UserDetailsImpl) authenticationToken.getPrincipal();
         User user = loginUser.getUser();
 
-        QueryWrapper<ChargingRecord> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id", user.getId());
-        return chargingRecordMapper.selectList(queryWrapper);
+        if(user.getId()==1||user.getId()==2||user.getId()==3) {
+            QueryWrapper<ChargingRecord> queryWrapper = new QueryWrapper<>();
+            queryWrapper.orderByAsc("id");
+            return chargingRecordMapper.selectList(queryWrapper);
+        } else{
+            QueryWrapper<ChargingRecord> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id", user.getId());
+            return chargingRecordMapper.selectList(queryWrapper);
+        }
     }
 }

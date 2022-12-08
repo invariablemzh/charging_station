@@ -26,10 +26,14 @@ public class OrderlistGetListServiceImpl implements OrderlistGetListService {
         UserDetailsImpl loginUser = (UserDetailsImpl) authenticationToken.getPrincipal();
         User user = loginUser.getUser();
 
-        QueryWrapper<Orderlist> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",user.getId());
-
-        return orderListMapper.selectList(queryWrapper);
-
+        if(user.getId()==1||user.getId()==2||user.getId()==3){
+            QueryWrapper<Orderlist> queryWrapper = new QueryWrapper<>();
+            queryWrapper.orderByAsc("order_id");
+            return orderListMapper.selectList(queryWrapper);
+        } else{
+            QueryWrapper<Orderlist> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",user.getId());
+            return orderListMapper.selectList(queryWrapper);
+        }
     }
 }
